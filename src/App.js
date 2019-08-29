@@ -4,6 +4,8 @@ import axios from 'axios';
 import SearchForm from './Components/SearchForm';
 import GifList from './Components/GifList';
 import Buttons from './Components/Buttons';
+import ReactDOM from 'react-dom';
+import {BrowserRouter, Route} from 'react-router-dom';
 
 export default class App extends Component {
   
@@ -19,11 +21,11 @@ export default class App extends Component {
     this.performSearch();
   }
   
-  performSearch = (query = 'cats') => {
-    axios.get(`http://api.giphy.com/v1/gifs/search?q=${query}&limit=24&api_key=dc6zaTOxFJmzC`)
+  performSearch = (query = 'weddings') => {
+    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=120f3ea66ea5e0d848bd2fc27ea62df8&tags=${query}&per_page=&format=json&nojsoncallback=1`)
       .then(response => {
         this.setState({
-          gifs: response.data.data,
+          gifs: response.data.photos,
           loading: false
         });
       })
@@ -38,7 +40,7 @@ export default class App extends Component {
       <div>
         <div className="main-header">
           <div className="inner">
-            <h1 className="main-title">GifSearch</h1>
+            <h1 className="main-title">Photo Search</h1>
             
             <SearchForm onSearch={this.performSearch} />    
             <Buttons />

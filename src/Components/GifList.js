@@ -6,8 +6,9 @@ const GifList = props => {
   
   const results = props.data;
   let gifs;
-  if (results.length) {
-    gifs = results.map(gif => <Gif url={gif.images.fixed_height.url} key={gif.id} />);    
+  if (results.photo.length) {
+    
+    gifs = results.photo.map(p => <Gif url={`https://farm${p.farm}.staticflickr.com/${p.server}/${p.id}_${p.secret}.jpg`} key={p.id} />);    
   } else {
     gifs = <NoGifs />
   }
